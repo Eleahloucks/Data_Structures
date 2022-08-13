@@ -152,21 +152,35 @@ def find_likeminded_villagers(filename, villager_name):
         >>> find_likeminded_villagers('villagers.csv', 'Wendy')
         {'Bella', ..., 'Carmen'}
     """
-    common_personality = set()
+
+    #open the file
     villagers_details = open(filename)
+    #created and empty set that we will return at the end
+    common_personality = set()
+    #looping over each line in file
+    villager_personality = None
     for line in villagers_details:
+        #save each detail by splitting
         details = line.split('|')
+        #save name detail
         name = details[0]
+        #save personailty
         personality = details[2]
+        #if the input villager name is the same as our name detail
         if villager_name == name:
+            #save that villagers personality under new var
             villager_personality = personality
+            break
 
-    for line in villagers_details:
-        details = line.split('|')
-        name = details[0]
-        if villager_personality in details:
-            common_personality.add(name)
+    villager_data = open(filename)
+    #while True:
+    for path in villager_data:
+        data = path.split('|')
+        current_name = data[0]
+        current_personality = data[2]
+        # print(current_personality)
+        if current_personality == villager_personality:
+            common_personality.add(current_name)
     return common_personality
-
 
 print(find_likeminded_villagers('villagers.csv', 'Bianca'))
